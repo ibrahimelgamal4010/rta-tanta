@@ -125,7 +125,7 @@ const dflt={uc:()=>UI.map(x=>x[0]),lc:()=>['name','num','owners','li','le','st']
 const lk=()=>{const S=DB.lc||dflt.lc();return CI.map(x=>x[0]).filter(k=>S.includes(k))};
 const lh=()=>['م',...lk().map(k=>CI.find(c=>c[0]==k)[1])];
 const lrows=L=>L.map((u,i)=>[i+1,...lk().map(k=>val(u,k))]);
-const listPdf=(L=DB.units.filter(match),t='كشف الوحدات')=>{const n=lk().length,K=lk();pr(t,`<table class="${n>9?'t9':n>6?'t10':''}"><tr>${lh().map(h=>`<th>${h}</th>`)}</tr>${lrows(L).map(r=>`<tr>${r.map((v,i)=>`<td>${K[i-1]=='st'?'<b>'+E(v)+'</b>':E(v)}</td>`)}</tr>`)}</table><p>العدد: ${L.length}</p>`,t,n>6)};
+const listPdf=(L=DB.units.filter(match),t='كشف الوحدات')=>{const n=lk().length,K=lk();pr(t,`<table class="${n>9?'t9':n>6?'t10':''}"><tr>${lh().map(h=>`<th>${h}</th>`)}</tr>${lrows(L).map(r=>`<tr>${r.map((v,i)=>`<td>${K[i-1]=='st'?'<b>'+E(v)+'</b>':E(v)}</td>`)}</tr>`)}</table>`,t,n>6)};
 const archPdf=()=>pr('صور أرشيف الوحدة: '+E(title(U(cur))),(window._A||[]).map(x=>`<p><b>${x.k=='lic'?'ترخيص':'معاينة'} - ${fd(x.d)}</b><br><img class="pi" src="${x.img}"></p>`).join(''));
 /* ---------- admin ---------- */
 function admin(){return`${bar('لوحة المدير','home')}<div class="w"><div class="card"><b>نسخة احتياطية</b><br><button onclick="bk()">⬇ حفظ نسخة كاملة</button><label>استرجاع نسخة (JSON)</label><input type="file" accept=".json" onchange="rs(this.files[0])"></div>
